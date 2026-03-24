@@ -1,8 +1,11 @@
 import geopandas as gpd 
 from sqlalchemy import create_engine 
 from spatial_weights import contiguity_weights, knn_weights, distance_weights 
-from visualization import visualize_neighbors
+from visualization import visualize_neighbors, visualize_local_moran
 from moran import calculate_global_morans_I 
+from esda.moran import Moran_Local
+
+import os 
 
 host = "localhost" 
 port = "5432" 
@@ -51,3 +54,19 @@ print("")
 run_moran(gdf, w_dist, attribute1, label="DistThres")
 run_moran(gdf, w_dist, attribute2, label="DistThres")
 print("")
+
+
+# local = Moran_Local(gdf["ass_ass_va"], w_cont)
+local = Moran_Local(gdf["ass_market"], w_cont)
+gdf["local_I"] = local.Is 
+gdf["p_value"] = local.p_sim
+
+gdf["cluster"] = "Not Significant"
+gdf.loc[(gdf["local_I"] > 0) & (gdf["p_value"] < 0.05), "cluster"] = "Hotspot" 
+gdf.loc[(gdf["local_I"] < 0) & (gdf["p_value"] < 0.05), "cluster"] = "Coldspot"
+
+# os.makedirs("output", exist_ok=True) 
+# gdf.to_file( "output/spatial_clusters.geojson", driver="GeoJSON" ) 
+# print("Saved: output/spatial_clusters.geojson")
+
+visualize_local_moran(gdf)

@@ -58,4 +58,24 @@
 6. Why Moran’s I requires both: a spatial weights matrix, and an attribute variable.
    - For calculation Moran's I the spatial weight matrix tells it where the points are and who are the neighbors of those points, the attribute variable tells it what values are being compared / autocorrelated. Moran's I calculates the values of parcels in relation to its neighbors that is why it needs both the location data of points and the attribute data for the values being compared.
 
+### Interpreting Local Spatial Autocorrelatio
+
+1. What is the difference between Global Moran’s I and Local Moran’s I? Explain how each statistic describes spatial autocorrelation at different spatial scales.
+   - Global Moran's I looks at the autocorrelation of parcels as a whole while Local Moran's I looks at autocorrelation of each parcel and identifies other parcels similar to it. Global Moran's I looks at the macro level while Local Moran's I looks at the micro level.
+
+2. How are hotspots and coldspots identified using Local Moran’s I? Explain how the values of the statistic and the p-value determine whether a parcel belongs to a cluster.
+   - Local Moran's I identifies hotspots and coldspots by using the value of the attribute of the parcel and comparing it to the average value of the neighbors of that parcel. High value parcel with high value neighbors corresponds to hotspots. Low value parcels with low value neighbors correspnds to lowspots. The P-value is used to determine if the relationship of parcels is statistically significant or if it is just random coincidence.
+
+3. Where do hotspots appear in your dataset? Describe the spatial location of clusters of high values. What geographic or urban factors might explain this pattern?
+   - In the dataset the hotspots appear in residential areas. The spatial clusters form in areas where there are a lot of small high value parcels close together. Being a residential area with a lot of houses, the assessment value increases and having parcels with high assessment value close together makes the area a hotspot in terms of assessment value.
+
+4. Where do coldspots appear in your dataset? Are there areas where low values cluster together? What spatial processes might explain these patterns?
+   - In the dataset coldspots appear in forrested and baresoil areas. The spatial cluster form on parcel where there is little to no development.
+5. Did you observe any spatial outliers? A spatial outlier occurs when a parcel has a value very different from its neighbors. Explain how such cases appear in the dataset.
+   - Parcel with gid 516 is a Hotspot parcel surrounded by Not Significant parcels. This parcel has a high ass_ass_va with its neighbors also having high ass_ass_va however its neighbors have p-value > 0.05 and it has p-value < 0.05 that is why even though it is in an area with high ass_ass_va, it is the only parcel tagged as Hotspot.
+6. How does changing the spatial weights method affect Local Moran’s I results? Repeat the analysis using another spatial weights method (e.g., KNN or distance). Do the hotspot locations change?
+   - The hotspots using Continuity and KNN weights are relatively the same. The hotspot using Distance Threshold are more clustered in an area with the hotspot size being smaller that might have been affected by the threshold selected which is 20.
+7. How does changing the attribute affect the spatial clusters? Run Local Moran’s I for: ass_ass_va, ass_market Compare the hotspot patterns. Why might these attributes produce different spatial clusters?
+   - When comparing the hotspots between Local Moran's I with Continuity weight and ass_ass_va, vs ass_market we can see that using ass_market as attribute made the hotspot more contiguous. This might be because market assessment value can adjust faster than assessment value therefore areas with high values can have very similar market value when they have different assessment values.
+
 ---

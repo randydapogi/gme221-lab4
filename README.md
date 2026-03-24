@@ -43,4 +43,19 @@
 6. Why is it important to visualize spatial weights before computing Moran’s I? What potential analytical mistakes could occur if the neighborhood structure is incorrect?
    - Visualizing the spatial weights before computing Moran's I can help us see if we are using the right neighborhood structure for calculating the Moran's I. Having incorrect neighborhood structure can drastically change the result of Moran's I or the result the correlation between points. The result of Moran's I is only as good as the defined neigborhood structure used in the calculation.
 
+### Global Autocorrelation Reflection
+
+1. What does positive Moran’s I indicate?
+   - Positive Moran's I indicate positive autocorrelation. This means that parcels that are close together have similar values.
+2. Why is the p-value required for interpretation?
+   - P-value is a check if the autocorrelation is due to relationship of values or due to randomness. P-value of < 0.05 indicates that autocorrelation is not due to Complete Spatial Randomness (CSR)
+3. What would Moran’s I near zero suggest?
+   - Moran's I value near zero suggest that the parcels have no discernible autocorrelation with its neighbors.
+4. What is the role of the attribute in computing Moran’s I? Why the choice of attribute (e.g., ass_ass_va vs ass_market) matters.
+   - The attribute selected in computing Moran's I are the values of the points that we are checking for autocorrelation. Each attribute in the parcel dataset can have different Moran's I or different autocorrelation with its neighbors.
+5. How the spatial autocorrelation result might change when a different attribute is analyzed.
+   - Different attribute have different autocorrelation with each other. For our parcel example, each parcel can have different assessed value to its assessed market value therefore you can have different hotspots for autocorrelation of assessed values compared to assessed market values.
+6. Why Moran’s I requires both: a spatial weights matrix, and an attribute variable.
+   - For calculation Moran's I the spatial weight matrix tells it where the points are and who are the neighbors of those points, the attribute variable tells it what values are being compared / autocorrelated. Moran's I calculates the values of parcels in relation to its neighbors that is why it needs both the location data of points and the attribute data for the values being compared.
+
 ---
